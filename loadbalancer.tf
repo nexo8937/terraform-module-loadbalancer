@@ -1,4 +1,4 @@
-resource "aws_elb" "exo-lb" {
+resource "aws_elb" "load-balancer" {
   name            = "load-balancer"
   internal        = false
   security_groups = [var.lb-sg]
@@ -17,6 +17,6 @@ resource "aws_elb" "exo-lb" {
     target              = "HTTP:80/wp-admin/install.php"
   }
   tags = {
-    Name = "exo-lb"
+    Name = "load-balancer"
   }
 }
