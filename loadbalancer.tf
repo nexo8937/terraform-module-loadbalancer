@@ -1,7 +1,7 @@
 resource "aws_elb" "load-balancer" {
   name            = "load-balancer"
   internal        = false
-  security_groups = [var.lb-sg]
+  security_groups = [aws_security_group.lb-sg.id]
   subnets         = [var.pub-sub-A, var.pub-sub-B]
   listener {
     lb_port           = 80
@@ -18,5 +18,35 @@ resource "aws_elb" "load-balancer" {
   }
   tags = {
     Name = "load-balancer"
+  }
+}
+
+#LOAD BALANCER SECURITY GROUP
+resource "aws_security_group" "lb-sg" {
+  name        = "load balancer sg"
+  vpc_id      = var.vpc
+  description = "Allow HTTP and HTTPS traffic"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "Load Balances sg"
   }
 }
