@@ -7,7 +7,7 @@ resource "aws_elb" "load-balancer" {
   listener {
     lb_port           = 80
     lb_protocol       = "http"
-    instance_port     = var.instance-port
+    instance_port     = 80
     instance_protocol = "http"
   }
   health_check {
