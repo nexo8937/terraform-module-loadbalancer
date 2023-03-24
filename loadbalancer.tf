@@ -1,7 +1,7 @@
 resource "aws_elb" "load-balancer" {
   name            = "load-balancer"
   internal        = false
-  security_groups = [var.lb-sg]
+  security_groups = [aws_security_group.lb-sg.id]
   subnets         = [var.pub-sub-A, var.pub-sub-B]
   listener {
     lb_port           = 80
