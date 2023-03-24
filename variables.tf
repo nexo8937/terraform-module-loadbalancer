@@ -4,7 +4,7 @@ variable "pub-sub-B" {}
 
 variable "vpc" {}
 
-variable "instacne-port" {
+variable "instance-port" {
   default = "80"
 }
 
