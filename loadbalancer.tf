@@ -1,3 +1,4 @@
+#Creating load balancer
 resource "aws_elb" "load-balancer" {
   name            = "load-balancer"
   internal        = false
@@ -6,21 +7,22 @@ resource "aws_elb" "load-balancer" {
   listener {
     lb_port           = 80
     lb_protocol       = "http"
-    instance_port     = "80"
+    instance_port     = var.instance-port
     instance_protocol = "http"
   }
   health_check {
-    healthy_threshold   = 2 #
-    unhealthy_threshold = 2 #
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
     timeout             = 3
     interval            = 30
-    target              = "HTTP:80/wp-admin/install.php"
+    target              = var.target
   }
   tags = {
     Name = "load-balancer"
   }
 }
 
+#Creating Load Balancer security group
 resource "aws_security_group" "lb-sg" {
   name        = "load balancer sg"
   vpc_id      = var.vpc
