@@ -15,7 +15,7 @@ resource "aws_elb" "load-balancer" {
     unhealthy_threshold = 2
     timeout             = 3
     interval            = 30
-    target              = var.target
+    target              = "HTTP:80/wp-admin/install.php"
   }
   tags = {
     Name = "load-balancer"
