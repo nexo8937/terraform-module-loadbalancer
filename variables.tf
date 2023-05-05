@@ -4,6 +4,6 @@ variable "pub-sub-B" {}
 
 variable "vpc" {}
 
-variable "target" {
-  default = "HTTP:80/wp-admin/install.php"
-}
+#variable "target" {
+#  default = "HTTP:80/wp-admin/install.php"
+#}
